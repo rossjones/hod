@@ -1,0 +1,9 @@
+
+<h1>View Harvester
+
+  <span class="pull-right">
+      <a href="<%= harvest_path(@conn, :index)%>" class="btn btn-default">&#171; Back</a>
+  </span>
+</h1>
+<hr/>
+

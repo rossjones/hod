@@ -1,0 +1,9 @@
+
+<h1>Edit Harvester
+
+  <span class="pull-right">
+      <a href="<%= harvest_path(@conn, :index)%>" class="btn btn-danger">Cancel</a>
+  </span>
+</h1>
+<hr/>
+

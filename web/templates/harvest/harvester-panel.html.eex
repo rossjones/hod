@@ -1,0 +1,31 @@
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+        <%= @harvester %>
+        <span class="pull-right" xstyle="margin-top: -10px; padding: 0; margin-right: -10px;">
+                <a href="<%= harvest_path(@conn, :edit, @harvester) %>"><i class="fa fa-pencil-square-o"></i></a>
+                &nbsp;
+                <a href="<%= harvest_path(@conn, :show, @harvester) %>"><i class="fa fa-eye"></i></a>
+        </span>
+    </h3>
+  </div>
+  <div class="panel-body">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Name:</th>
+                <td>My harvester</td>
+            </tr>
+            <tr>
+                <th>Datasets harvester:</th>
+                <td>24</td>
+            </tr>
+            <tr>
+                <th>Last run:</th>
+                <td>10/10/2015 @ 1408</td>
+            </tr>
+            </tbody>
+        </table>
+  </div>
+</div>
