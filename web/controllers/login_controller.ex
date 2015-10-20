@@ -37,7 +37,7 @@ defmodule Harvest.LoginController do
         conn
           |> put_session(:current_user, user)
           |> put_flash(:info, 'You are now signed in.')
-          |> redirect(to: harvest_path(conn, :index))
+          |> redirect(to: harvester_path(conn, :index))
       true ->
         conn
           |> put_flash(:error, 'Username or password are incorrect.')

@@ -1,0 +1,19 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li class="active">Harvesters</li>
+</ol>
+
+<h2>Harvesters
+<small class="pull-right">
+      <a class="btn btn-info" href="<%= harvester_path(@conn, :new) %>">New harvester</a>
+</small>
+</h2>
+<hr/>
+
+<%= for harvester <- @harvester do %>
+  <div class="col-md-4">
+    <%= render "harvester-panel.html", conn: @conn, harvester: harvester %>
+  </div>
+<% end %>
+
+

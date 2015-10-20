@@ -22,7 +22,7 @@
           <ul class="nav navbar-nav">
             <%= if @current_user do %>
             <li>
-              <a href="<%= harvest_path(@conn, :index) %>">Harvesters</a>
+              <a href="<%= harvester_path(@conn, :index) %>">Harvesters</a>
             </li>
             <% end  %>
 

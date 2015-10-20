@@ -1,4 +1,5 @@
-<div class="jumbotron">
+
+<div class="jumbotron" >
   <h2>Welcome to the Open Data Harvester</h2>
   <p class="lead">Harvesting datasets so you don't have to.</p>
 </div>

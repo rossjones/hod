@@ -2,11 +2,11 @@
 <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">
-        <%= @harvester %>
+        <%= @harvester.name %>
         <span class="pull-right" xstyle="margin-top: -10px; padding: 0; margin-right: -10px;">
-                <a href="<%= harvest_path(@conn, :edit, @harvester) %>"><i class="fa fa-pencil-square-o"></i></a>
+                <a href="<%= harvester_path(@conn, :edit, @harvester.id) %>"><i class="fa fa-pencil-square-o"></i></a>
                 &nbsp;
-                <a href="<%= harvest_path(@conn, :show, @harvester) %>"><i class="fa fa-eye"></i></a>
+                <a href="<%= harvester_path(@conn, :show, @harvester.id) %>"><i class="fa fa-eye"></i></a>
         </span>
     </h3>
   </div>
@@ -18,6 +18,11 @@
                 <td>My harvester</td>
             </tr>
             <tr>
+                <th>Type:</th>
+                <td><img src='<%= static_path(@conn, "/images/#{String.downcase(@harvester.type)}-mini.png") %>'> <%= @harvester.type %></td>
+            </tr>
+
+            <tr>
                 <th>Datasets harvester:</th>
                 <td>24</td>
             </tr>
@@ -27,5 +32,10 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="pull-right">
+                <a href="" class="btn btn-sm btn-info">Run now!</a>
+        </div>
+
   </div>
 </div>

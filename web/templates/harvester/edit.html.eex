@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href='<%= harvester_path(@conn, :index) %>'>Harvesters</a></li>
+  <li><a href='<%= harvester_path(@conn, :show, @harvester.id) %>'><%= @harvester.name %></a></li>
+  <li class="active">Edit</li>
+</ol>
+
+<h2>Edit harvester</h2>
+<hr/>
+
+<%= render "form.html", changeset: @changeset,
+                        action: harvester_path(@conn, :update, @harvester) %>
+
+<%= link "Back", to: harvester_path(@conn, :index) %>

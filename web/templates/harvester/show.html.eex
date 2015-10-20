@@ -1,0 +1,48 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href='<%= harvester_path(@conn, :index) %>'>Harvesters</a></li>
+  <li class="active"><%= @harvester.name %></li>
+</ol>
+
+<h2><%= @harvester.name %>
+  <div class="pull-right">
+      <%= link "Back", to: harvester_path(@conn, :index), class: "btn btn-info" %>
+  </div>
+</h2>
+<hr/>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @harvester.name %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @harvester.type %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @harvester.user_id %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @harvester.status %>
+  </li>
+
+  <li>
+    <strong>Config:</strong>
+    <%= @harvester.config %>
+  </li>
+
+  <li>
+    <strong>Last run:</strong>
+    <%= @harvester.last_run %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: harvester_path(@conn, :edit, @harvester) %>
