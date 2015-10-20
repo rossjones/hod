@@ -29,6 +29,7 @@ defmodule Harvest.Router do
     get "/about", PageController, :about
 
     resources "/harvester", HarvesterController
+    get "/harvester/:id/run", HarvesterController, :run
 
   end
 

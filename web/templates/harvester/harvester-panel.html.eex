@@ -37,7 +37,7 @@
         </table>
 
         <div class="pull-right">
-                <a href="" class="btn btn-sm btn-info">Run now!</a>
+                <a href='<%= harvester_path(@conn, :run, @harvester.id) %>' class="btn btn-sm btn-info">Run now!</a>
         </div>
 
   </div>

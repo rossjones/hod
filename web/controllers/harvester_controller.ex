@@ -6,6 +6,19 @@ defmodule Harvest.HarvesterController do
   plug Harvest.Plug.LoginRequired
   plug :scrub_params, "harvester" when action in [:create, :update]
 
+  def run(conn, %{"id" => id}) do
+    uid = conn.assigns.current_user.id
+    harvester = Repo.get(Harvester, id)
+    if harvester == nil || harvester.user_id != uid do
+      conn |> redirect(to: harvester_path(conn, :index))
+    else
+      # TODO: Actually trigger a run if it is now already running ...
+
+      # TODO: Update state to running ...
+      conn |> redirect(to: harvester_path(conn, :show, id))
+    end
+  end
+
   def index(conn, _params) do
     user_id = conn.assigns.current_user.id
     harvesters = Repo.all(
@@ -80,12 +93,17 @@ defmodule Harvest.HarvesterController do
   def delete(conn, %{"id" => id}) do
     harvester = Repo.get!(Harvester, id)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(harvester)
+    if harvester == nil || harvester.user_id != conn.assigns.current_user.id do
+      conn |> redirect(to: harvester_path(conn, :index))
+    else
+      # TODO: just set state to disabled...
+      Repo.delete!(harvester)
 
-    conn
-    |> put_flash(:info, "Harvester deleted successfully.")
-    |> redirect(to: harvester_path(conn, :index))
+      conn
+      |> put_flash(:info, "Harvester deleted successfully.")
+      |> redirect(to: harvester_path(conn, :index))
+    end
   end
+
+
 end
