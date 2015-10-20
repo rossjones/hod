@@ -38,27 +38,42 @@ defmodule Harvest.HarvesterController do
   end
 
   def show(conn, %{"id" => id}) do
-    harvester = Repo.get!(Harvester, id)
-    render(conn, "show.html", harvester: harvester)
+    uid = conn.assigns.current_user.id
+    harvester = Repo.get(Harvester, id)
+    if harvester == nil || harvester.user_id != uid do
+      conn |> redirect(to: harvester_path(conn, :index))
+    else
+      render(conn, "show.html", harvester: harvester)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
-    harvester = Repo.get!(Harvester, id)
-    changeset = Harvester.changeset(harvester)
-    render(conn, "edit.html", harvester: harvester, changeset: changeset)
+    uid = conn.assigns.current_user.id
+    harvester = Repo.get(Harvester, id)
+    if harvester == nil || harvester.user_id != uid do
+      conn |> redirect(to: harvester_path(conn, :index))
+    else
+      changeset = Harvester.changeset(harvester)
+      render(conn, "edit.html", harvester: harvester, changeset: changeset)
+    end
   end
 
   def update(conn, %{"id" => id, "harvester" => harvester_params}) do
-    harvester = Repo.get!(Harvester, id)
-    changeset = Harvester.changeset(harvester, harvester_params)
+    uid = conn.assigns.current_user.id
+    harvester = Repo.get_by(Harvester, id: id, user_id: uid)
+    if harvester == nil do
+      conn |> redirect(to: harvester_path(conn, :index))
+    else
+      changeset = Harvester.changeset(harvester, harvester_params)
 
-    case Repo.update(changeset) do
-      {:ok, harvester} ->
-        conn
-        |> put_flash(:info, "Harvester updated successfully.")
-        |> redirect(to: harvester_path(conn, :show, harvester))
-      {:error, changeset} ->
-        render(conn, "edit.html", harvester: harvester, changeset: changeset)
+      case Repo.update(changeset) do
+        {:ok, harvester} ->
+          conn
+          |> put_flash(:info, "Harvester updated successfully.")
+          |> redirect(to: harvester_path(conn, :show, harvester))
+        {:error, changeset} ->
+          render(conn, "edit.html", harvester: harvester, changeset: changeset)
+      end
     end
   end
 

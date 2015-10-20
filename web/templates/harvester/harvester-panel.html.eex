@@ -1,5 +1,5 @@
 
-<div class="panel panel-info">
+<div class="panel panel-<%= level_for_state(@harvester.status) %>">
   <div class="panel-heading">
     <h3 class="panel-title">
         <%= @harvester.name %>
@@ -21,7 +21,10 @@
                 <th>Type:</th>
                 <td><img src='<%= static_path(@conn, "/images/#{String.downcase(@harvester.type)}-mini.png") %>'> <%= @harvester.type %></td>
             </tr>
-
+            <tr>
+                <th>Status:</th>
+                <td><%= String.upcase(@harvester.status) %></td>
+            </tr>
             <tr>
                 <th>Datasets harvester:</th>
                 <td>24</td>
