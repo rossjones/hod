@@ -36,7 +36,6 @@ defmodule Harvest.LoginController do
       Comeonin.Bcrypt.checkpw(password, user.encrypted_password) ->
         conn
           |> put_session(:current_user, user)
-          |> put_flash(:info, 'You are now signed in.')
           |> redirect(to: harvester_path(conn, :index))
       true ->
         conn

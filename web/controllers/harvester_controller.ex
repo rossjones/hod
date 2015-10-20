@@ -3,11 +3,18 @@ defmodule Harvest.HarvesterController do
 
   alias Harvest.Harvester
 
+  plug Harvest.Plug.LoginRequired
   plug :scrub_params, "harvester" when action in [:create, :update]
 
   def index(conn, _params) do
-    harvester = Repo.all(Harvester)
-    render(conn, "index.html", harvester: harvester)
+    user_id = conn.assigns.current_user.id
+    harvesters = Repo.all(
+          from h in Harvester,
+          where: h.user_id == ^user_id,
+          select: h
+    )
+
+    render(conn, "index.html", harvesters: harvesters)
   end
 
   def new(conn, _params) do
@@ -16,7 +23,9 @@ defmodule Harvest.HarvesterController do
   end
 
   def create(conn, %{"harvester" => harvester_params}) do
-    changeset = Harvester.changeset(%Harvester{}, harvester_params)
+    uid = conn.assigns.current_user.id
+
+    changeset = Harvester.changeset(%Harvester{:user_id=>uid}, harvester_params)
 
     case Repo.insert(changeset) do
       {:ok, _harvester} ->
