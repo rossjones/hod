@@ -12,8 +12,8 @@ defmodule Harvest.Harvester do
     timestamps
   end
 
-  @required_fields ~w(name type status config last_run)
-  @optional_fields ~w()
+  @required_fields ~w(name type status  last_run)
+  @optional_fields ~w(config )
 
   @doc """
   Creates a changeset based on the `model` and `params`.

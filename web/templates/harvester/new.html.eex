@@ -4,10 +4,12 @@
   <li class="active">New</li>
 </ol>
 
+<div class="col-md-10 col-md-offset-1">
 <h2>New harvester</h2>
 <hr/>
 
 <%= render "form.html", changeset: @changeset,
                         action: harvester_path(@conn, :create) %>
 
-<%= link "Back", to: harvester_path(@conn, :index) %>
+<%= link "Cancel", to: harvester_path(@conn, :index), class: "btn" %>
+</div>

@@ -17,25 +17,17 @@
 
   <div class="form-group">
     <%= label f, :type, "Type", class: "control-label" %>
-    <%= text_input f, :type, class: "form-control" %>
+    <%= select f, :type, ["CKAN"], class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :status, "Status", class: "control-label" %>
-    <%= text_input f, :status, class: "form-control" %>
-  </div>
+  <input type="hidden" name="harvester[status]" value="PENDING"/>
+  <input type="hidden" name="harvester[last_run][hour]" value="0"/>
+  <input type="hidden" name="harvester[last_run][min]" value="0"/>
+  <input type="hidden" name="harvester[last_run][month]" value="1"/>
+  <input type="hidden" name="harvester[last_run][day]" value="1"/>
+  <input type="hidden" name="harvester[last_run][year]" value="2000"/>
 
   <div class="form-group">
-    <%= label f, :config, "Config", class: "control-label" %>
-    <%= text_input f, :config, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :last_run, "Last run", class: "control-label" %>
-    <%= datetime_select f, :last_run, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+    <%= submit "Submit", class: "btn btn-success pull-right" %>
   </div>
 <% end %>
