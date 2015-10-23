@@ -30,6 +30,7 @@ defmodule Harvest.Router do
 
     resources "/harvester", HarvesterController
     get "/harvester/:id/run", HarvesterController, :run
+    get "/harvester/:id/configure", HarvesterController, :configure
 
   end
 

@@ -41,12 +41,22 @@ defmodule Harvest.HarvesterController do
     changeset = Harvester.changeset(%Harvester{:user_id=>uid}, harvester_params)
 
     case Repo.insert(changeset) do
-      {:ok, _harvester} ->
+      {:ok, harvester} ->
         conn
         |> put_flash(:info, "Harvester created successfully.")
-        |> redirect(to: harvester_path(conn, :index))
+        |> redirect(to: harvester_path(conn, :configure, harvester.id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  def configure(conn, %{"id" => id}) do
+    uid = conn.assigns.current_user.id
+    harvester = Repo.get(Harvester, id)
+    if harvester == nil || harvester.user_id != uid do
+      conn |> redirect(to: harvester_path(conn, :index))
+    else
+      render(conn, "configure_ckan.html", harvester: harvester)
     end
   end
 

@@ -4,6 +4,10 @@
     <h3 class="panel-title">
         <%= @harvester.name %>
         <span class="pull-right" xstyle="margin-top: -10px; padding: 0; margin-right: -10px;">
+
+                <a href="<%= harvester_path(@conn, :configure, @harvester.id) %>"><i class="fa fa-cog"></i></a>
+                &nbsp;
+
                 <a href="<%= harvester_path(@conn, :edit, @harvester.id) %>"><i class="fa fa-pencil-square-o"></i></a>
                 &nbsp;
                 <a href="<%= harvester_path(@conn, :show, @harvester.id) %>"><i class="fa fa-eye"></i></a>
